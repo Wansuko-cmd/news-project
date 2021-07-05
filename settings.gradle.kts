@@ -8,4 +8,4 @@
  */
 
 rootProject.name = "news-project"
-include("app", "list", "utilities")
+include("core")
