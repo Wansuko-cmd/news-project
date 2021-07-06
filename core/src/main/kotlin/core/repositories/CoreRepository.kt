@@ -1,13 +1,20 @@
 package core.repositories
 
-import core.domain.MainDomain
+import core.di.koinModule
+import core.domain.main.MainDomainInterface
 import core.entities.Article
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class CoreRepository {
+class CoreRepository : KoinComponent {
 
-    private val mainDomain = MainDomain()
+    init {
+        koinModule()
+    }
 
-    fun getArticle(): List<Article>{
+    private val mainDomain by inject<MainDomainInterface>()
+
+    suspend fun getArticle(): List<Article>{
         return mainDomain.getArticles()
     }
 }

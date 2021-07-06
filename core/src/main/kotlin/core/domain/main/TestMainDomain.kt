@@ -1,15 +1,15 @@
-package core.domain
+package core.domain.main
 
 import core.entities.Article
 import core.entities.Source
 import kotlinx.coroutines.runBlocking
 import naoko.entities.json.articles.NaokoArticles
 
-internal class MainDomain {
+internal class TestMainDomain : MainDomainInterface {
 
-    fun getArticles(): List<Article> = runBlocking {
+    override suspend fun getArticles(): List<Article> {
 
-        return@runBlocking mutableListOf(
+        return listOf(
             Article(
                 source = Source(
                     id="google-news", name="Google News"
@@ -49,29 +49,5 @@ internal class MainDomain {
                 content=null
             )
         )
-    }
-
-    fun convertToArticle(naokoArticle: NaokoArticles): List<Article>{
-
-        val result = mutableListOf<Article>()
-
-        naokoArticle.articles?.let{
-            it.forEach { article ->
-                result.add(
-                    Article(
-                        source = Source(article.source?.id, article.source?.name),
-                        author = article.author,
-                        title = article.title,
-                        description = article.description,
-                        url = article.url,
-                        urlToImage = article.urlToImage,
-                        publishedAt = article.publishedAt,
-                        content = article.content
-                    )
-                )
-            }
-        }
-
-        return result
     }
 }
