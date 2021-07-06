@@ -31,4 +31,6 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
 
     implementation("com.wsr:naoko:1.0.3")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
 }
