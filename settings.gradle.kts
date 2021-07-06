@@ -8,4 +8,4 @@
  */
 
 rootProject.name = "news-project"
-include("core")
+include("core", "android:app")

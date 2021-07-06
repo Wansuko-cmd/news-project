@@ -7,7 +7,7 @@
  */
 plugins {
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
-    kotlin("jvm") version "1.5.0"
+    kotlin("jvm") version "1.5.10"
 }
 
 repositories {
@@ -30,5 +30,5 @@ dependencies {
     // Use the Kotlin JUnit integration.
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
 
-    implementation("com.wsr:naoko:1.0.1")
+    implementation("com.wsr:naoko:1.0.3")
 }
