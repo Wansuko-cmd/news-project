@@ -2,10 +2,11 @@ package com.wsr.android.view.index
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.wsr.android.R
 import com.wsr.android.databinding.ActivityIndexBinding
+import com.wsr.android.view_model.index.IndexViewModel
 
 class IndexActivity : AppCompatActivity() {
 
@@ -14,6 +15,8 @@ class IndexActivity : AppCompatActivity() {
 
     private lateinit var activityIndexRecyclerView: RecyclerView
     private lateinit var indexAdapter: IndexAdapter
+
+    private lateinit var indexViewModel: IndexViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +30,16 @@ class IndexActivity : AppCompatActivity() {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
             adapter = indexAdapter
+        }
+
+        indexViewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        ).get(IndexViewModel::class.java).apply {
+
+            articles.observe(this@IndexActivity){
+                indexAdapter.setArticles(it)
+            }
         }
     }
 }

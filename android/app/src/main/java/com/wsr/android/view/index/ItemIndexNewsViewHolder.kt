@@ -6,4 +6,6 @@ import com.wsr.android.databinding.ItemIndexNewsHeaderBinding
 class ItemIndexNewsViewHolder(
     binding: ItemIndexNewsHeaderBinding
 ) : RecyclerView.ViewHolder(binding.root) {
+
+    var title = binding.title
 }
