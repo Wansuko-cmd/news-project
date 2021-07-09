@@ -7,6 +7,7 @@ class ItemIndexNewsViewHolder(
     binding: ItemIndexNewsHeaderBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    var title = binding.title
-    var thumbnail = binding.indexThumbnail
+    val view = binding.root
+    val title = binding.title
+    val thumbnail = binding.indexThumbnail
 }

@@ -24,7 +24,7 @@ class IndexActivity : AppCompatActivity() {
         _binding = ActivityIndexBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        indexAdapter = IndexAdapter()
+        indexAdapter = IndexAdapter(this)
 
         activityIndexRecyclerView = binding.activityIndexRecyclerView.apply {
             setHasFixedSize(true)
