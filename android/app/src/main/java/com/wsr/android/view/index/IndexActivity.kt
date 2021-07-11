@@ -1,11 +1,14 @@
 package com.wsr.android.view.index
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.wsr.android.R
 import com.wsr.android.databinding.ActivityIndexBinding
+import com.wsr.android.view.settings.SettingsActivity
 import com.wsr.android.view_model.index.IndexViewModel
 
 class IndexActivity : AppCompatActivity() {
@@ -24,6 +27,8 @@ class IndexActivity : AppCompatActivity() {
         _binding = ActivityIndexBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setToolbar()
+
         indexAdapter = IndexAdapter(this)
 
         activityIndexRecyclerView = binding.activityIndexRecyclerView.apply {
@@ -39,6 +44,22 @@ class IndexActivity : AppCompatActivity() {
 
             articles.observe(this@IndexActivity){
                 indexAdapter.setArticles(it)
+            }
+        }
+    }
+
+
+    private fun setToolbar(){
+        binding.activityIndexToolBar.apply{
+            setOnMenuItemClickListener { menuItem ->
+                when(menuItem.itemId){
+                    R.id.settings -> {
+                        val intent = Intent(this@IndexActivity, SettingsActivity::class.java)
+                        startActivity(intent)
+                    }
+                }
+
+                true
             }
         }
     }
