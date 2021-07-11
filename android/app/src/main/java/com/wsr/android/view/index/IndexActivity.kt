@@ -69,12 +69,12 @@ class IndexActivity : AppCompatActivity() {
         binding.activityIndexToolBar.apply{
             setOnMenuItemClickListener { menuItem ->
                 when(menuItem.itemId){
-                    R.id.settings -> {
+                    R.id.activity_index_settings -> {
                         val intent = Intent(this@IndexActivity, SettingsActivity::class.java)
                         startActivity(intent)
                     }
 
-                    R.id.favorite -> {
+                    R.id.activity_index_show_favorite -> {
                         val intent = Intent(this@IndexActivity, FavoriteActivity::class.java)
                         startActivity(intent)
                     }

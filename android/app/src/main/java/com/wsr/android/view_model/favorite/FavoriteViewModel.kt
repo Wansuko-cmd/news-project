@@ -1,6 +1,5 @@
 package com.wsr.android.view_model.favorite
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,11 +11,11 @@ class FavoriteViewModel : ViewModel(){
 
     private val favoriteRepository = FavoriteRepository()
 
-    lateinit var articles: LiveData<List<Article>>
+    val articles: MutableLiveData<List<Article>> = MutableLiveData()
 
     init {
         viewModelScope.launch {
-            articles = MutableLiveData(favoriteRepository.getAllFavorites())
+            articles.postValue(favoriteRepository.getAllFavorites())
         }
     }
 }
