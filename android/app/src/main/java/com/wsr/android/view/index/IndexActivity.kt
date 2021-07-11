@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.wsr.android.R
@@ -31,10 +32,16 @@ class IndexActivity : AppCompatActivity() {
 
         indexAdapter = IndexAdapter(this)
 
+        val divider = DividerItemDecoration(
+            this,
+            LinearLayoutManager(this).orientation
+        )
+
         activityIndexRecyclerView = binding.activityIndexRecyclerView.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
             adapter = indexAdapter
+            addItemDecoration(divider)
         }
 
         indexViewModel = ViewModelProvider(
