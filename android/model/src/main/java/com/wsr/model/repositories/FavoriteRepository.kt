@@ -2,14 +2,16 @@ package com.wsr.model.repositories
 
 import core.entities.Article
 import core.entities.Source
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class FavoriteRepository {
 
-    suspend fun getAllFavorites(): List<Article>{
-        return favorites
+    suspend fun getAllFavorites(): List<Article> = withContext(Dispatchers.IO){
+        return@withContext favorites
     }
 
-    suspend fun createFavorite(value: Article){
+    suspend fun createFavorite(value: Article) = withContext(Dispatchers.IO){
         favorites.add(value)
     }
 

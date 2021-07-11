@@ -33,6 +33,11 @@ class IndexAdapter(
             activity.startActivity(intent)
         }
 
+        holder.view.setOnLongClickListener {
+            activity.createFavorite(articles[position])
+            true
+        }
+
         Picasso
             .get()
             .load(articles[position].urlToImage)

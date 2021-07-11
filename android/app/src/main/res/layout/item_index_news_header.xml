@@ -8,7 +8,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/index_thumbnail"
+        android:id="@+id/index_news_header_thumbnail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="fitCenter"
@@ -17,13 +17,21 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/index_news_header_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/index_thumbnail"
+        app:layout_constraintTop_toBottomOf="@id/index_news_header_thumbnail"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:layout_margin="10dp"
         tools:text="TITLE" />
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        app:layout_constraintTop_toBottomOf="@id/index_news_header_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

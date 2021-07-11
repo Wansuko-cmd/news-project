@@ -2,6 +2,7 @@ package com.wsr.android.view.index
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -12,6 +13,7 @@ import com.wsr.android.databinding.ActivityIndexBinding
 import com.wsr.android.view.favorite.FavoriteActivity
 import com.wsr.android.view.settings.SettingsActivity
 import com.wsr.android.view_model.index.IndexViewModel
+import core.entities.Article
 
 class IndexActivity : AppCompatActivity() {
 
@@ -54,6 +56,12 @@ class IndexActivity : AppCompatActivity() {
                 indexAdapter.setArticles(it)
             }
         }
+    }
+
+
+    fun createFavorite(article: Article){
+        indexViewModel.createFavorite(article)
+        Toast.makeText(this, "お気に入りに登録しました", Toast.LENGTH_LONG).show()
     }
 
 
