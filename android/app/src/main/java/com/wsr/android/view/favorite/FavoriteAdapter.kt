@@ -1,12 +1,15 @@
 package com.wsr.android.view.favorite
 
+import android.app.AlertDialog
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.wsr.android.databinding.ItemFavoriteNewsHeaderBinding
+import com.wsr.android.view.show.ShowActivity
 import core.entities.Article
 
-class FavoriteAdapter : RecyclerView.Adapter<ItemFavoriteNewsViewHolder>() {
+class FavoriteAdapter(private val activity: FavoriteActivity) : RecyclerView.Adapter<ItemFavoriteNewsViewHolder>() {
 
     private var articles = listOf<Article>()
 
@@ -20,6 +23,26 @@ class FavoriteAdapter : RecyclerView.Adapter<ItemFavoriteNewsViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ItemFavoriteNewsViewHolder, position: Int) {
+
+        holder.view.setOnClickListener {
+            val intent = Intent(activity, ShowActivity::class.java)
+            intent.putExtra("url", articles[position].url)
+            activity.startActivity(intent)
+        }
+
+        holder.view.setOnLongClickListener {
+            AlertDialog.Builder(activity)
+                .setTitle("警告")
+                .setMessage("お気に入りから削除しますか？")
+                .setPositiveButton("はい"){ _, _ ->
+                    activity.deleteFavorite()
+                }
+                .setNegativeButton("いいえ", null)
+                .show()
+
+            true
+        }
+
         holder.title.text = articles[position].title
     }
 
