@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.wsr.android.R
 import com.wsr.android.databinding.ActivityIndexBinding
+import com.wsr.android.view.favorite.FavoriteActivity
 import com.wsr.android.view.settings.SettingsActivity
 import com.wsr.android.view_model.index.IndexViewModel
 
@@ -62,6 +63,11 @@ class IndexActivity : AppCompatActivity() {
                 when(menuItem.itemId){
                     R.id.settings -> {
                         val intent = Intent(this@IndexActivity, SettingsActivity::class.java)
+                        startActivity(intent)
+                    }
+
+                    R.id.favorite -> {
+                        val intent = Intent(this@IndexActivity, FavoriteActivity::class.java)
                         startActivity(intent)
                     }
                 }

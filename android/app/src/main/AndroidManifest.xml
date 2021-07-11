@@ -23,6 +23,8 @@
 
         <activity android:name=".view.show.ShowActivity"/>
 
+        <activity android:name=".view.favorite.FavoriteActivity"/>
+
         <activity android:name=".view.settings.SettingsActivity"/>
     </application>
 
