@@ -5,7 +5,7 @@ import core.domain.main.TestMainDomain
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
 
-fun koinModule() {
+internal fun koinModule() {
 
     val modules = module {
         factory<MainDomainInterface> { TestMainDomain() }
