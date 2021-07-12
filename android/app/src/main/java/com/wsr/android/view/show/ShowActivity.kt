@@ -1,5 +1,7 @@
 package com.wsr.android.view.show
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.KeyEvent
 import android.webkit.WebView
@@ -74,12 +76,6 @@ class ShowActivity : AppCompatActivity() {
         return super.onKeyDown(keyCode, event)
     }
 
-    override fun onResume() {
-        super.onResume()
-
-        setToolbar()
-    }
-
 
     private fun setToolbar(){
         binding.activityShowToolBar.also{
@@ -96,6 +92,22 @@ class ShowActivity : AppCompatActivity() {
                         showViewModel.createFavorite(article)
 
                         Toast.makeText(this, "お気に入りに登録しました", Toast.LENGTH_LONG).show()
+                    }
+
+                    R.id.activity_show_share -> {
+                        //ユーザの指定したアプリへのintentの処理
+                        val intent = Intent().apply {
+                            action = Intent.ACTION_SEND
+                            type = "text/plain"
+                            putExtra(Intent.EXTRA_TEXT, showWebView.url)
+                        }
+                        startActivity(intent)
+                    }
+
+                    R.id.activity_show_use_browser -> {
+                        val webpage = Uri.parse(showWebView.url)
+                        val intent = Intent(Intent.ACTION_VIEW, webpage)
+                        startActivity(intent)
                     }
                 }
 
