@@ -1,9 +1,10 @@
 package com.wsr.android.view.show
 
 import android.os.Bundle
+import android.view.KeyEvent
 import android.webkit.WebView
-import android.webkit.WebViewClient
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.wsr.android.R
@@ -20,6 +21,8 @@ class ShowActivity : AppCompatActivity() {
 
     private lateinit var showWebView: WebView
 
+    private lateinit var showWebViewClient: ShowWebViewClient
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -31,16 +34,52 @@ class ShowActivity : AppCompatActivity() {
             ViewModelProvider.NewInstanceFactory()
         ).get(ShowViewModel::class.java)
 
-        setToolbar()
+        showWebViewClient = ShowWebViewClient{
+            binding.activityShowToolBar.title = it
+        }
 
         intent.getStringExtra("url")?.let{
             showWebView = binding.activityShowWebView.apply{
                 loadUrl(it)
                 settings.javaScriptEnabled = true
-                webViewClient = WebViewClient()
+                webViewClient = showWebViewClient
+            }
+
+            setToolbar()
+        }
+
+        binding.apply {
+            activityShowGoBack.setOnClickListener {
+                showWebView.goBack()
+            }
+
+            activityShowRepeat.setOnClickListener {
+                showWebView.reload()
+            }
+
+            activityShowGoForward.setOnClickListener {
+                showWebView.goForward()
             }
         }
     }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        // Check if the key event was the Back button and if there's history
+        if (keyCode == KeyEvent.KEYCODE_BACK && showWebView.canGoBack()) {
+            showWebView.goBack()
+            return true
+        }
+        // If it wasn't the Back key or there's no web page history, bubble up to the default
+        // system behavior (probably exit the activity)
+        return super.onKeyDown(keyCode, event)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        setToolbar()
+    }
+
 
     private fun setToolbar(){
         binding.activityShowToolBar.also{
@@ -61,6 +100,17 @@ class ShowActivity : AppCompatActivity() {
                 }
 
                 true
+            }
+
+            it.setOnClickListener {
+                AlertDialog.Builder(this)
+                    .setTitle("確認")
+                    .setMessage("ホームに戻りますか？")
+                    .setPositiveButton("はい"){_, _ ->
+                        finish()
+                    }
+                    .setNegativeButton("いいえ", null)
+                    .show()
             }
         }
     }
