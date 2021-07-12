@@ -85,8 +85,11 @@ class IndexActivity : AppCompatActivity() {
                         val intent = Intent(this@IndexActivity, FavoriteActivity::class.java)
                         startActivity(intent)
                     }
-                }
 
+                    R.id.activity_index_repeat -> {
+                        indexViewModel.reloadArticles()
+                    }
+                }
                 true
             }
         }

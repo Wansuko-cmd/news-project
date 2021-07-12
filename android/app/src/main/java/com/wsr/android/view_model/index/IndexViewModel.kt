@@ -25,4 +25,8 @@ class IndexViewModel : ViewModel() {
     fun createFavorite(favorite: Favorite) = viewModelScope.launch {
         favoriteRepository.createFavorite(favorite)
     }
+
+    fun reloadArticles() = viewModelScope.launch{
+        articles.postValue(coreRepository.getArticle())
+    }
 }

@@ -48,8 +48,8 @@ class FavoriteAdapter(private val activity: FavoriteActivity) : RecyclerView.Ada
         holder.title.text = favorites[position].title
     }
 
-    fun setArticles(articles: List<Favorite>){
-        this.favorites = articles
+    fun setArticles(favorites: List<Favorite>){
+        this.favorites = favorites.sortedByDescending { it.createdAt }
         notifyDataSetChanged()
     }
 }

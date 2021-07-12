@@ -12,4 +12,10 @@
         android:title="settings"
         android:icon="@drawable/ic_baseline_settings_24"
         app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/activity_index_repeat"
+        android:title="repeat"
+        android:icon="@drawable/ic_baseline_repeat_24"
+        app:showAsAction="ifRoom"/>
 </menu>
