@@ -45,13 +45,13 @@ class FavoriteActivity : AppCompatActivity() {
             ViewModelProvider.NewInstanceFactory()
         ).get(FavoriteViewModel::class.java).apply {
 
-            articles.observe(this@FavoriteActivity){
+            favorite.observe(this@FavoriteActivity){
                 favoriteAdapter.setArticles(it)
             }
         }
     }
 
-    fun deleteFavorite(){
-        Toast.makeText(this, "idで消えるようにする", Toast.LENGTH_LONG).show()
+    fun deleteFavorite(id: Int){
+        favoriteViewModel.deleteFavorite(id)
     }
 }

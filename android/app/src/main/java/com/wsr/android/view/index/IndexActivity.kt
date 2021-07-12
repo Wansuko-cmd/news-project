@@ -13,7 +13,9 @@ import com.wsr.android.databinding.ActivityIndexBinding
 import com.wsr.android.view.favorite.FavoriteActivity
 import com.wsr.android.view.settings.SettingsActivity
 import com.wsr.android.view_model.index.IndexViewModel
+import com.wsr.model.db.entities.Favorite
 import core.entities.Article
+import java.time.LocalDateTime
 
 class IndexActivity : AppCompatActivity() {
 
@@ -60,7 +62,12 @@ class IndexActivity : AppCompatActivity() {
 
 
     fun createFavorite(article: Article){
-        indexViewModel.createFavorite(article)
+        indexViewModel.createFavorite(Favorite(
+            id = 0,
+            title = article.title ?: "取得エラー",
+            url = article.url ?: "取得エラー",
+            createdAt = LocalDateTime.now()
+        ))
         Toast.makeText(this, "お気に入りに登録しました", Toast.LENGTH_LONG).show()
     }
 

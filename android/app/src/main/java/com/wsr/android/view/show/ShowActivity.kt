@@ -12,7 +12,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.wsr.android.R
 import com.wsr.android.databinding.ActivityShowBinding
 import com.wsr.android.view_model.show.ShowViewModel
+import com.wsr.model.db.entities.Favorite
 import core.entities.Article
+import java.time.LocalDateTime
 
 class ShowActivity : AppCompatActivity() {
 
@@ -85,11 +87,13 @@ class ShowActivity : AppCompatActivity() {
                 when(menuItem.itemId){
                     R.id.activity_show_register_favorite -> {
 
-                        val article = Article(
-                            title = showWebView.title,
-                            url = showWebView.url
+                        val favorite = Favorite(
+                            id = 0,
+                            title = showWebView.title ?: "取得エラー",
+                            url = showWebView.url ?: "取得エラー",
+                            createdAt = LocalDateTime.now()
                         )
-                        showViewModel.createFavorite(article)
+                        showViewModel.createFavorite(favorite)
 
                         Toast.makeText(this, "お気に入りに登録しました", Toast.LENGTH_LONG).show()
                     }

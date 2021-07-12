@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.wsr.android.databinding.ItemFavoriteNewsHeaderBinding
 import com.wsr.android.view.show.ShowActivity
+import com.wsr.model.db.entities.Favorite
 import core.entities.Article
 
 class FavoriteAdapter(private val activity: FavoriteActivity) : RecyclerView.Adapter<ItemFavoriteNewsViewHolder>() {
 
-    private var articles = listOf<Article>()
+    private var favorites = listOf<Favorite>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemFavoriteNewsViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -19,14 +20,14 @@ class FavoriteAdapter(private val activity: FavoriteActivity) : RecyclerView.Ada
     }
 
     override fun getItemCount(): Int {
-        return articles.size
+        return favorites.size
     }
 
     override fun onBindViewHolder(holder: ItemFavoriteNewsViewHolder, position: Int) {
 
         holder.view.setOnClickListener {
             val intent = Intent(activity, ShowActivity::class.java)
-            intent.putExtra("url", articles[position].url)
+            intent.putExtra("url", favorites[position].url)
             activity.startActivity(intent)
         }
 
@@ -35,7 +36,8 @@ class FavoriteAdapter(private val activity: FavoriteActivity) : RecyclerView.Ada
                 .setTitle("警告")
                 .setMessage("お気に入りから削除しますか？")
                 .setPositiveButton("はい"){ _, _ ->
-                    activity.deleteFavorite()
+                    activity.deleteFavorite(favorites[position].id)
+                    notifyItemRemoved(position)
                 }
                 .setNegativeButton("いいえ", null)
                 .show()
@@ -43,11 +45,11 @@ class FavoriteAdapter(private val activity: FavoriteActivity) : RecyclerView.Ada
             true
         }
 
-        holder.title.text = articles[position].title
+        holder.title.text = favorites[position].title
     }
 
-    fun setArticles(articles: List<Article>){
-        this.articles = articles
+    fun setArticles(articles: List<Favorite>){
+        this.favorites = articles
         notifyDataSetChanged()
     }
 }
