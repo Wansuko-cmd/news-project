@@ -42,7 +42,7 @@ class FavoriteActivity : AppCompatActivity() {
 
         favoriteViewModel = ViewModelProvider(
             this,
-            ViewModelProvider.NewInstanceFactory()
+            ViewModelProvider.AndroidViewModelFactory(application)
         ).get(FavoriteViewModel::class.java).apply {
 
             favorites.observe(this@FavoriteActivity){

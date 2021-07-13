@@ -35,7 +35,7 @@ class ShowActivity : AppCompatActivity() {
 
         showViewModel = ViewModelProvider(
             this,
-            ViewModelProvider.NewInstanceFactory()
+            ViewModelProvider.AndroidViewModelFactory(application)
         ).get(ShowViewModel::class.java)
 
         showWebViewClient = ShowWebViewClient{

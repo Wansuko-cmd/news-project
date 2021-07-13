@@ -1,17 +1,15 @@
 package com.wsr.android.view_model.favorite
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import android.app.Application
+import androidx.lifecycle.*
 import com.wsr.model.db.entities.Favorite
 import com.wsr.model.repositories.FavoriteRepository
 import core.entities.Article
 import kotlinx.coroutines.launch
 
-class FavoriteViewModel : ViewModel(){
+class FavoriteViewModel(application: Application) : AndroidViewModel(application){
 
-    private val favoriteRepository = FavoriteRepository()
+    private val favoriteRepository = FavoriteRepository(application)
 
     val favorites: LiveData<List<Favorite>> = favoriteRepository.getAllFavorites()
 

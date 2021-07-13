@@ -51,7 +51,7 @@ class IndexActivity : AppCompatActivity() {
 
         indexViewModel = ViewModelProvider(
             this,
-            ViewModelProvider.NewInstanceFactory()
+            ViewModelProvider.AndroidViewModelFactory(application)
         ).get(IndexViewModel::class.java).apply {
 
             articles.observe(this@IndexActivity){

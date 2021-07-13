@@ -10,22 +10,18 @@ import com.wsr.model.db.dao.FavoriteDao
 import com.wsr.model.db.entities.Favorite
 import kotlinx.coroutines.CoroutineScope
 
-@Database(entities = [Favorite::class], version = 1)
+@Database(entities = [Favorite::class], version = 1, exportSchema = false)
 @TypeConverters(LocalDateTimeConverter::class)
 abstract class NewsDatabase : RoomDatabase(){
 
     abstract fun favoriteDao(): FavoriteDao
 
-    private class NewsDatabaseCallback(private val scope: CoroutineScope) : RoomDatabase.Callback(){
-
-    }
-
     companion object{
 
-        @Volatile
+//        @Volatile
         private var INSTANCE: NewsDatabase? = null
 
-        fun getDatabase(context: Context, scope: CoroutineScope) : NewsDatabase {
+        fun getDatabase(context: Context) : NewsDatabase {
 
             INSTANCE?.let{
                 return it
@@ -37,7 +33,6 @@ abstract class NewsDatabase : RoomDatabase(){
                     NewsDatabase::class.java,
                     "news_database"
                 )
-                    .addCallback(NewsDatabaseCallback(scope))
                     .build()
 
                 INSTANCE = instance
