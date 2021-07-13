@@ -10,13 +10,9 @@ import kotlin.coroutines.EmptyCoroutineContext.hashCode
 
 internal fun koinModule() {
 
-    val modules = module {
-        factory<ModelDomainInterface> { TestModelDomain() }
+    KoinContext.koinApplication = koinApplication{
+        modules(module {
+            factory<ModelDomainInterface> { TestModelDomain() }
+        })
     }
-
-    loadKoinModules(modules)
-
-//    koinApplication {
-//        modules(modules)
-//    }
 }
