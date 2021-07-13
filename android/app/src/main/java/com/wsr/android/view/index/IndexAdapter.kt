@@ -1,6 +1,7 @@
 package com.wsr.android.view.index
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -28,6 +29,7 @@ class IndexAdapter(
     override fun onBindViewHolder(holder: ItemIndexNewsViewHolder, position: Int) {
 
         holder.view.setOnClickListener {
+            Log.i("飛ぶArticle: ", articles[position].toString())
             val intent = Intent(activity, ShowActivity::class.java)
             intent.putExtra("url", articles[position].url)
             activity.startActivity(intent)

@@ -2,14 +2,19 @@ package core.domain.main
 
 import core.entities.Article
 import core.entities.Source
+import core.env.Env
 import kotlinx.coroutines.runBlocking
+import naoko.Naoko
+import naoko.entities.enum.Country
 import naoko.entities.json.articles.NaokoArticles
 
 internal class MainDomain : MainDomainInterface {
 
-    override suspend fun getArticles(): List<Article> {
+    val naoko = Naoko.build(Env.API_KEY.value, Country.JP)
 
-        return mutableListOf()
+    override suspend fun getArticles(): List<Article> {
+        val naokoArticles = naoko.getTopHeadlines()
+        return convertToArticle(naokoArticles)
     }
 
     private fun convertToArticle(naokoArticle: NaokoArticles): List<Article>{
