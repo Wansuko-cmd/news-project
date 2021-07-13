@@ -1,7 +1,6 @@
 package com.wsr.android.view.favorite
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -26,6 +25,7 @@ class FavoriteActivity : AppCompatActivity() {
         _binding = ActivityFavoriteBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         favoriteAdapter = FavoriteAdapter(this)
 
         val divider = DividerItemDecoration(
@@ -40,6 +40,7 @@ class FavoriteActivity : AppCompatActivity() {
             addItemDecoration(divider)
         }
 
+
         favoriteViewModel = ViewModelProvider(
             this,
             ViewModelProvider.AndroidViewModelFactory(application)
@@ -51,6 +52,7 @@ class FavoriteActivity : AppCompatActivity() {
         }
     }
 
+    //お気に入りを削除する関数
     fun deleteFavorite(id: Int){
         favoriteViewModel.deleteFavorite(id)
     }

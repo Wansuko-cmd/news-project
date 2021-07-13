@@ -2,8 +2,6 @@ package core.domain.main
 
 import core.entities.Article
 import core.entities.Source
-import kotlinx.coroutines.runBlocking
-import naoko.entities.json.articles.NaokoArticles
 
 internal class TestMainDomain : MainDomainInterface {
 

@@ -1,7 +1,6 @@
 package com.wsr.android.view.index
 
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -28,18 +27,24 @@ class IndexAdapter(
 
     override fun onBindViewHolder(holder: ItemIndexNewsViewHolder, position: Int) {
 
-        holder.view.setOnClickListener {
-            Log.i("飛ぶArticle: ", articles[position].toString())
-            val intent = Intent(activity, ShowActivity::class.java)
-            intent.putExtra("url", articles[position].url)
-            activity.startActivity(intent)
+
+        holder.view.apply{
+
+            //記事の参照
+            setOnClickListener {
+                val intent = Intent(activity, ShowActivity::class.java)
+                intent.putExtra("url", articles[position].url)
+                activity.startActivity(intent)
+            }
+
+            //記事のお気に入り削除機能
+            setOnLongClickListener {
+                activity.insertFavorite(articles[position])
+                true
+            }
         }
 
-        holder.view.setOnLongClickListener {
-            activity.createFavorite(articles[position])
-            true
-        }
-
+        //画像の読み込み
         Picasso
             .get()
             .load(articles[position].urlToImage)
@@ -50,6 +55,7 @@ class IndexAdapter(
         holder.title.text = articles[position].title ?: ""
     }
 
+    //記事の更新処理
     fun setArticles(articles: List<Article>){
         this.articles = articles
         notifyDataSetChanged()

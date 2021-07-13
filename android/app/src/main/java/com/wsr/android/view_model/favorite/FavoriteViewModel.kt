@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.lifecycle.*
 import com.wsr.model.db.entities.Favorite
 import com.wsr.model.repositories.FavoriteRepository
-import core.entities.Article
 import kotlinx.coroutines.launch
 
 class FavoriteViewModel(application: Application) : AndroidViewModel(application){

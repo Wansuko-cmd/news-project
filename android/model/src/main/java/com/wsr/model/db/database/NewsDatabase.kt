@@ -8,7 +8,6 @@ import androidx.room.TypeConverters
 import com.wsr.model.db.converters.LocalDateTimeConverter
 import com.wsr.model.db.dao.FavoriteDao
 import com.wsr.model.db.entities.Favorite
-import kotlinx.coroutines.CoroutineScope
 
 @Database(entities = [Favorite::class], version = 1, exportSchema = false)
 @TypeConverters(LocalDateTimeConverter::class)
@@ -18,7 +17,7 @@ abstract class NewsDatabase : RoomDatabase(){
 
     companion object{
 
-//        @Volatile
+        @Volatile
         private var INSTANCE: NewsDatabase? = null
 
         fun getDatabase(context: Context) : NewsDatabase {

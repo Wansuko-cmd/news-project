@@ -13,7 +13,6 @@ import com.wsr.android.R
 import com.wsr.android.databinding.ActivityShowBinding
 import com.wsr.android.view_model.show.ShowViewModel
 import com.wsr.model.db.entities.Favorite
-import core.entities.Article
 import java.time.LocalDateTime
 
 class ShowActivity : AppCompatActivity() {
@@ -33,16 +32,21 @@ class ShowActivity : AppCompatActivity() {
         _binding = ActivityShowBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         showViewModel = ViewModelProvider(
             this,
             ViewModelProvider.AndroidViewModelFactory(application)
         ).get(ShowViewModel::class.java)
 
+
         showWebViewClient = ShowWebViewClient{
             binding.activityShowToolBar.title = it
         }
 
+        //渡されたURLがnullじゃない場合
         intent.getStringExtra("url")?.let{
+
+            //記事の読み込み
             showWebView = binding.activityShowWebView.apply{
                 loadUrl(it)
                 settings.javaScriptEnabled = true
@@ -52,12 +56,14 @@ class ShowActivity : AppCompatActivity() {
             setToolbar()
         }
 
+
+        //各種操作ボタンの設定
         binding.apply {
             activityShowGoBack.setOnClickListener {
                 showWebView.goBack()
             }
 
-            activityShowRepeat.setOnClickListener {
+            activityShowReload.setOnClickListener {
                 showWebView.reload()
             }
 
@@ -67,24 +73,28 @@ class ShowActivity : AppCompatActivity() {
         }
     }
 
+
+    //戻るボタンの設定
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        // Check if the key event was the Back button and if there's history
+
         if (keyCode == KeyEvent.KEYCODE_BACK && showWebView.canGoBack()) {
             showWebView.goBack()
             return true
         }
-        // If it wasn't the Back key or there's no web page history, bubble up to the default
-        // system behavior (probably exit the activity)
+
         return super.onKeyDown(keyCode, event)
     }
 
 
+    //Toolbarの設定
     private fun setToolbar(){
-        binding.activityShowToolBar.also{
+        binding.activityShowToolBar.apply{
 
-            it.setOnMenuItemClickListener { menuItem ->
+            setOnMenuItemClickListener { menuItem ->
 
                 when(menuItem.itemId){
+
+                    //お気に入りに登録する機能
                     R.id.activity_show_register_favorite -> {
 
                         val favorite = Favorite(
@@ -93,11 +103,13 @@ class ShowActivity : AppCompatActivity() {
                             url = showWebView.url ?: "取得エラー",
                             createdAt = LocalDateTime.now()
                         )
-                        showViewModel.createFavorite(favorite)
+                        showViewModel.insertFavorite(favorite)
 
-                        Toast.makeText(this, "お気に入りに登録しました", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@ShowActivity, "お気に入りに登録しました", Toast.LENGTH_LONG).show()
                     }
 
+
+                    //共有機能
                     R.id.activity_show_share -> {
                         //ユーザの指定したアプリへのintentの処理
                         val intent = Intent().apply {
@@ -108,6 +120,8 @@ class ShowActivity : AppCompatActivity() {
                         startActivity(intent)
                     }
 
+
+                    //ブラウザで開く機能
                     R.id.activity_show_use_browser -> {
                         val webpage = Uri.parse(showWebView.url)
                         val intent = Intent(Intent.ACTION_VIEW, webpage)
@@ -118,8 +132,9 @@ class ShowActivity : AppCompatActivity() {
                 true
             }
 
-            it.setOnClickListener {
-                AlertDialog.Builder(this)
+            //タイトルを押したときの処理
+            setOnClickListener {
+                AlertDialog.Builder(this@ShowActivity)
                     .setTitle("確認")
                     .setMessage("ホームに戻りますか？")
                     .setPositiveButton("はい"){_, _ ->

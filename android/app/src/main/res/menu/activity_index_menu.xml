@@ -8,9 +8,9 @@
         app:showAsAction="ifRoom"/>
 
     <item
-            android:id="@+id/activity_index_repeat"
-            android:title="repeat"
-            android:icon="@drawable/ic_baseline_repeat_24"
+            android:id="@+id/activity_index_reload"
+            android:title="reload"
+            android:icon="@drawable/ic_baseline_reload_24"
             app:showAsAction="ifRoom"/>
 
     <item

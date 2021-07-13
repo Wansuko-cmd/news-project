@@ -1,6 +1,5 @@
 package com.wsr.model.domain
 
-import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.wsr.model.db.entities.Favorite
@@ -8,7 +7,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.time.LocalDateTime
 
-class TestModelDomain() : ModelDomainInterface{
+class TestModelDomain : ModelDomainInterface{
 
     override val favorites: LiveData<List<Favorite>> = MutableLiveData(testFavorites)
 

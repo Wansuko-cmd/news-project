@@ -3,14 +3,13 @@ package core.domain.main
 import core.entities.Article
 import core.entities.Source
 import core.env.Env
-import kotlinx.coroutines.runBlocking
 import naoko.Naoko
 import naoko.entities.enum.Country
 import naoko.entities.json.articles.NaokoArticles
 
 internal class MainDomain : MainDomainInterface {
 
-    val naoko = Naoko.build(Env.API_KEY.value, Country.JP)
+    private val naoko = Naoko.build(Env.API_KEY.value, Country.JP)
 
     override suspend fun getArticles(): List<Article> {
         val naokoArticles = naoko.getTopHeadlines()

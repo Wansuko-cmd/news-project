@@ -35,6 +35,7 @@ class IndexActivity : AppCompatActivity() {
 
         setToolbar()
 
+
         indexAdapter = IndexAdapter(this)
 
         val divider = DividerItemDecoration(
@@ -49,6 +50,7 @@ class IndexActivity : AppCompatActivity() {
             addItemDecoration(divider)
         }
 
+
         indexViewModel = ViewModelProvider(
             this,
             ViewModelProvider.AndroidViewModelFactory(application)
@@ -61,8 +63,9 @@ class IndexActivity : AppCompatActivity() {
     }
 
 
-    fun createFavorite(article: Article){
-        indexViewModel.createFavorite(Favorite(
+    //お気に入りを作成する関数
+    fun insertFavorite(article: Article){
+        indexViewModel.insertFavorite(Favorite(
             id = 0,
             title = article.title ?: "取得エラー",
             url = article.url ?: "取得エラー",
@@ -72,21 +75,26 @@ class IndexActivity : AppCompatActivity() {
     }
 
 
+    //Toolbarの設定
     private fun setToolbar(){
         binding.activityIndexToolBar.apply{
             setOnMenuItemClickListener { menuItem ->
                 when(menuItem.itemId){
+
+                    //設定画面
                     R.id.activity_index_settings -> {
                         val intent = Intent(this@IndexActivity, SettingsActivity::class.java)
                         startActivity(intent)
                     }
 
+                    //お気に入り一覧画面
                     R.id.activity_index_show_favorite -> {
                         val intent = Intent(this@IndexActivity, FavoriteActivity::class.java)
                         startActivity(intent)
                     }
 
-                    R.id.activity_index_repeat -> {
+                    //記事の再読み込み
+                    R.id.activity_index_reload -> {
                         indexViewModel.reloadArticles()
                     }
                 }

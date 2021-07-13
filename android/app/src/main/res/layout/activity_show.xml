@@ -35,11 +35,11 @@
             android:src="@drawable/ic_baseline_arrow_back_24"/>
 
         <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/activity_show_repeat"
+            android:id="@+id/activity_show_reload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/ic_baseline_repeat_24"/>
+            android:src="@drawable/ic_baseline_reload_24"/>
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/activity_show_go_forward"

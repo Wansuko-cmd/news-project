@@ -8,9 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.wsr.android.databinding.ItemFavoriteNewsHeaderBinding
 import com.wsr.android.view.show.ShowActivity
 import com.wsr.model.db.entities.Favorite
-import core.entities.Article
 
-class FavoriteAdapter(private val activity: FavoriteActivity) : RecyclerView.Adapter<ItemFavoriteNewsViewHolder>() {
+class FavoriteAdapter(
+    private val activity: FavoriteActivity
+    ) : RecyclerView.Adapter<ItemFavoriteNewsViewHolder>() {
 
     private var favorites = listOf<Favorite>()
 
@@ -25,29 +26,37 @@ class FavoriteAdapter(private val activity: FavoriteActivity) : RecyclerView.Ada
 
     override fun onBindViewHolder(holder: ItemFavoriteNewsViewHolder, position: Int) {
 
-        holder.view.setOnClickListener {
-            val intent = Intent(activity, ShowActivity::class.java)
-            intent.putExtra("url", favorites[position].url)
-            activity.startActivity(intent)
+
+        holder.view.apply {
+
+            //記事の参照
+            setOnClickListener {
+                val intent = Intent(activity, ShowActivity::class.java)
+                intent.putExtra("url", favorites[position].url)
+                activity.startActivity(intent)
+            }
+
+            //記事のお気に入り削除機能
+            setOnLongClickListener {
+                AlertDialog.Builder(activity)
+                    .setTitle("警告")
+                    .setMessage("お気に入りから削除しますか？")
+                    .setPositiveButton("はい"){ _, _ ->
+                        activity.deleteFavorite(favorites[position].id)
+                        notifyItemRemoved(position)
+                    }
+                    .setNegativeButton("いいえ", null)
+                    .show()
+
+                true
+            }
         }
 
-        holder.view.setOnLongClickListener {
-            AlertDialog.Builder(activity)
-                .setTitle("警告")
-                .setMessage("お気に入りから削除しますか？")
-                .setPositiveButton("はい"){ _, _ ->
-                    activity.deleteFavorite(favorites[position].id)
-                    notifyItemRemoved(position)
-                }
-                .setNegativeButton("いいえ", null)
-                .show()
-
-            true
-        }
 
         holder.title.text = favorites[position].title
     }
 
+    //お気に入り記事の更新処理
     fun setArticles(favorites: List<Favorite>){
         this.favorites = favorites.sortedByDescending { it.createdAt }
         notifyDataSetChanged()
