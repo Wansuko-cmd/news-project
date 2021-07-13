@@ -45,7 +45,7 @@ class FavoriteActivity : AppCompatActivity() {
             ViewModelProvider.NewInstanceFactory()
         ).get(FavoriteViewModel::class.java).apply {
 
-            favorite.observe(this@FavoriteActivity){
+            favorites.observe(this@FavoriteActivity){
                 favoriteAdapter.setArticles(it)
             }
         }

@@ -1,5 +1,6 @@
 package com.wsr.android.view_model.favorite
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,13 +13,7 @@ class FavoriteViewModel : ViewModel(){
 
     private val favoriteRepository = FavoriteRepository()
 
-    val favorite: MutableLiveData<List<Favorite>> = MutableLiveData()
-
-    init {
-        viewModelScope.launch {
-            favorite.postValue(favoriteRepository.getAllFavorites())
-        }
-    }
+    val favorites: LiveData<List<Favorite>> = favoriteRepository.getAllFavorites()
 
     fun deleteFavorite(id: Int) = viewModelScope.launch{
         favoriteRepository.deleteFavorite(id)

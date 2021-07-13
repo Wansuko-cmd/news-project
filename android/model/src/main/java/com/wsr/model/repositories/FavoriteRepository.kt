@@ -1,5 +1,6 @@
 package com.wsr.model.repositories
 
+import androidx.lifecycle.LiveData
 import com.wsr.model.db.entities.Favorite
 import com.wsr.model.di.ModelKoinComponent
 import com.wsr.model.di.koinModule
@@ -18,7 +19,7 @@ class FavoriteRepository: ModelKoinComponent{
 
     private val modelDomain by inject<ModelDomainInterface>()
 
-    suspend fun getAllFavorites(): List<Favorite> = modelDomain.getAllFavorites()
+    fun getAllFavorites(): LiveData<List<Favorite>> = modelDomain.favorites
 
     suspend fun createFavorite(favorite: Favorite): Unit = modelDomain.insertFavorite(favorite)
 
