@@ -43,7 +43,7 @@ class IndexAdapter(
         Picasso
             .get()
             .load(articles[position].urlToImage)
-            .placeholder(R.drawable.ic_launcher_foreground)
+            .placeholder(R.drawable.logo_kotlin_ex)
             .into(holder.thumbnail)
 
         
