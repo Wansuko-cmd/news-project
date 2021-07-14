@@ -5,7 +5,7 @@ import core.entities.Source
 
 internal class TestMainDomain : MainDomainInterface {
 
-    override suspend fun getArticles(): List<Article> {
+    override suspend fun getArticles(country: String): List<Article> {
 
         return listOf(
             Article(

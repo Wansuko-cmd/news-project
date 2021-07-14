@@ -2,6 +2,7 @@ package com.wsr.android.view.settings
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.wsr.android.R
 import com.wsr.android.databinding.ActivitySettingsBinding
 
 class SettingsActivity : AppCompatActivity(){
@@ -14,5 +15,10 @@ class SettingsActivity : AppCompatActivity(){
 
         _binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.settings_fragment_container, PreferenceFragment())
+            .commit()
     }
 }

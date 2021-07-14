@@ -14,7 +14,7 @@ class CoreRepository : CoreKoinComponent {
 
     private val mainDomain by inject<MainDomainInterface>()
 
-    suspend fun getArticle(): List<Article>{
-        return mainDomain.getArticles()
+    suspend fun getArticle(country: String = "JP"): List<Article>{
+        return mainDomain.getArticles(country)
     }
 }

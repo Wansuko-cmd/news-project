@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">android</string>
+
+
+    <string-array name="country_list">
+        <item>US</item>
+        <item>JP</item>
+    </string-array>
 </resources>

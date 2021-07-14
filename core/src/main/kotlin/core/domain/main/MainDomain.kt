@@ -11,8 +11,8 @@ internal class MainDomain : MainDomainInterface {
 
     private val naoko = Naoko.build(Env.API_KEY.value, Country.JP)
 
-    override suspend fun getArticles(): List<Article> {
-        val naokoArticles = naoko.getTopHeadlines()
+    override suspend fun getArticles(country: String): List<Article> {
+        val naokoArticles = naoko.getTopHeadlines(country = Country.serializer(country))
         return convertToArticle(naokoArticles)
     }
 

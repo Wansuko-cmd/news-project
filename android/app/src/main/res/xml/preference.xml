@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <SwitchPreferenceCompat
+            android:key="use_js"
+            android:title="JSを有効にする"
+            android:summaryOn="有効"
+            android:summaryOff="無効"
+            android:defaultValue="true"/>
+
+    <ListPreference
+            android:key="collect_country"
+            android:title="表示する国"
+            android:entries="@array/country_list"
+            android:entryValues="@array/country_list"
+            android:defaultValue="JP"
+    />
+
+</PreferenceScreen>

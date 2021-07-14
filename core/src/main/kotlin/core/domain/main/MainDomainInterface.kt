@@ -5,5 +5,5 @@ import org.koin.core.component.KoinComponent
 
 internal interface MainDomainInterface : KoinComponent {
 
-    suspend fun getArticles(): List<Article>
+    suspend fun getArticles(country: String = "JP"): List<Article>
 }

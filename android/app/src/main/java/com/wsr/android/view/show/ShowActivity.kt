@@ -1,5 +1,6 @@
 package com.wsr.android.view.show
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.wsr.android.R
 import com.wsr.android.databinding.ActivityShowBinding
+import com.wsr.android.view.settings.checkUseJS
 import com.wsr.android.view_model.show.ShowViewModel
 import com.wsr.model.db.entities.Favorite
 import java.time.LocalDateTime
@@ -49,8 +51,10 @@ class ShowActivity : AppCompatActivity() {
             //記事の読み込み
             showWebView = binding.activityShowWebView.apply{
                 loadUrl(it)
-                settings.javaScriptEnabled = true
                 webViewClient = showWebViewClient
+
+                @SuppressLint("SetJavaScriptEnabled")
+                if(checkUseJS(this@ShowActivity)) settings.javaScriptEnabled = true
             }
 
             setToolbar()
