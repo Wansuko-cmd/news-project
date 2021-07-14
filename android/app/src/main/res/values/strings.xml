@@ -1,9 +1,25 @@
 <resources>
     <string name="app_name">android</string>
 
+    <string-array name="country_list_labels">
+        <item>日本</item>
+        <item>アメリカ</item>
+        <item>イギリス</item>
+        <item>オーストラリア</item>
+        <item>ニュージーランド</item>
+        <item>インド</item>
+        <item>カナダ</item>
+        <item>南アフリカ</item>
+    </string-array>
 
-    <string-array name="country_list">
-        <item>US</item>
+    <string-array name="country_list_values">
         <item>JP</item>
+        <item>US</item>
+        <item>GB</item>
+        <item>AU</item>
+        <item>NZ</item>
+        <item>IN</item>
+        <item>CA</item>
+        <item>ZA</item>
     </string-array>
 </resources>
